@@ -1,0 +1,51 @@
+body{
+    background-image: url('../img/mesa.jpg');
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-size: 100% 100%;
+}
+img{
+    max-width: 100px;
+    height: auto;
+    /*position: relative;
+    left: 42vw;*/
+}
+#placar{
+    display: inline-flex;
+    margin-bottom: 1px;
+}
+#cartasJRod,#cartasCRod{
+    display: inline-flex;
+    margin-top: 1px;
+}
+h2,h3,h4{
+    color: bisque;
+    margin-bottom: 1px;
+}
+#jogo{
+    text-align: center;
+}
+#start{
+    /*margin-left: 45vw;*/
+    text-align: center;
+    margin-top: 45vh;
+    display: block;
+}
+#start input{
+    border-width: 10px;
+    border-radius: 5px;
+    border-style: double;
+    outline: none;
+    background-color: black;
+    color: white;
+}
+#start button{
+    margin-top: 2px;
+    min-width: 10vw;
+    height: auto;
+    border-radius: 5px;
+    border-style: double;
+    border-width: 10px;
+    background-color: black;
+    color: white;
+}

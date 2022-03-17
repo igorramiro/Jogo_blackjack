@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="start">
+        <input type="text" id="nome" ><br>
+        <button onclick="iniciar()">Novo Jogo</button>
+    </div>
+    <div id="jogo" hidden>
+        <div id="crupie">
+            <h2>Crupie</h2>
+            <div id="cartasCru">
+                <div id="placar">
+                    <h3>Cartas: </h3>
+                    <h4 id="placarC"></h4>
+                </div><br>
+                <div id="cartasCRod">
+                </div>
+            </div>
+        </div>
+        <div id="jogador">
+            <div id="cartasJog">
+                <div id="placar">
+                    <h3>Cartas: </h3>
+                    <h4 id="placarJ"></h4>
+                </div><br>
+                <div id="cartasJRod">
+                </div>
+            </div>
+            <button id="compraCarta" onclick="maisCarta()">Mais 1</button>
+            <button id="compraCarta" onclick="fim()">Parar</button>
+            <h2 id="nm_jogador"></h2>
+        </div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
