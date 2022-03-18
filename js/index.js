@@ -9,7 +9,6 @@ var cartasUsadas = 0
 var aux = [1, 2, 3, 4]
 function iniciar() {
     MonteJ = Monte.sort(() => Math.random() - 0.5)//global
-    console.log(MonteJ)
     if ($('#nome').val() == '') {
         alert('Coloque seu nome')
         EventTarget.preventDefault();
