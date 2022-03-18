@@ -7,14 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
     <link rel="stylesheet" href="css/index.css">
-    <title>Document</title>
+    <title>Blackjack</title>
 </head>
 
 <body>
     <div id="start">
-        <input type="text" id="nome" ><br>
+        <input type="text" id="nome"><br>
         <button onclick="iniciar()">Novo Jogo</button>
     </div>
+    <div id="anuncio" hidden></div>
     <div id="jogo" hidden>
         <div id="crupie">
             <h2>Crupie</h2>
@@ -36,8 +37,10 @@
                 <div id="cartasJRod">
                 </div>
             </div>
-            <button id="compraCarta" onclick="maisCarta()">Mais 1</button>
-            <button id="compraCarta" onclick="fim()">Parar</button>
+            <div id="action">
+                <button id="compraCarta" onclick="maisCarta()">+1</button>
+                <button id="compraCarta" onclick="fim()">Parar</button>
+            </div>
             <h2 id="nm_jogador"></h2>
         </div>
     </div>

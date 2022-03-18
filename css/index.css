@@ -4,11 +4,19 @@ body{
     height: 100vh;
     background-size: 100% 100%;
 }
+#anuncio{
+    position: absolute;
+    text-align: center;
+    margin-left: 30vw;    
+    width: 35vw;
+    margin-top: 35vh; 
+    padding: 20px;
+    border-radius: 5px;
+    font-size: large;
+}
 img{
     max-width: 100px;
     height: auto;
-    /*position: relative;
-    left: 42vw;*/
 }
 #placar{
     display: inline-flex;
@@ -17,6 +25,7 @@ img{
 #cartasJRod,#cartasCRod{
     display: inline-flex;
     margin-top: 1px;
+    flex-wrap: wrap;
 }
 h2,h3,h4{
     color: bisque;
@@ -46,6 +55,13 @@ h2,h3,h4{
     border-radius: 5px;
     border-style: double;
     border-width: 10px;
+    background-color: black;
+    color: white;
+}
+#action button{
+    border-style: solid;
+    border-radius: 45%;
+    padding: 5px;
     background-color: black;
     color: white;
 }

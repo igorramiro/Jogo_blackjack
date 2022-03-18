@@ -7,7 +7,6 @@ var placarJ = 0
 var placarC = 0
 var cartasUsadas = 0
 var aux = [1, 2, 3, 4]
-console.log($('#cartasCRod'))
 function iniciar() {
     MonteJ = Monte.sort(() => Math.random() - 0.5)//global
     console.log(MonteJ)
@@ -20,11 +19,6 @@ function iniciar() {
     }
     $('#start').hide()
     $('#jogo').show()
-    /*MonteJ = ['2flo', 'A11flo', '10flo', '10flo', '8dia', 'A11flo', '6flo', '7flo', '8dia', '10dia', '8flo',
-        'Qcor', 'Kdia', '5cor', 'A11cor', '2dia', 'Jdia', '3flo', '9cor', 'A11flo', '10flo', '3cor', 'Kcor',
-        '10cor', '6flo', '9flo', '10flo', '4cor', '2cor', '2flo', '3flo', '6dia', '8cor', 'Qdia', 'Qflo',
-        'Qflo', 'Jcor', '6cor', '5dia', '9dia', '9flo', '4flo', '4dia', 'Jflo', '8flo', 'Kflo', '7cor',
-        'Jflo', '5flo', '3dia', '2flo', '7dia']//para testes*/
     primeCartas()
 }
 
@@ -36,13 +30,7 @@ function primeCartas() {//define as primeiras cartas
     $('#cartasJRod').append('<h4 id=J' + MonteJ[cartasUsadas + 2].replace(/[a-z]/g, '') + '><img src="img/' + MonteJ[cartasUsadas + 2] + '.png" alt=""></h4>')
     $('#cartasCRod').append('<h4 id=C' + MonteJ[cartasUsadas + 3].replace(/[a-z]/g, '') + '><img id="' + MonteJ[cartasUsadas + 3] + '" class="verso" src="img/versocarta.png" alt=""></h4>')
     for (let i = 0; i < aux.length; i++) {
-        aux[i] = MonteJ[cartasUsadas + i].replace(/[a-z]/g, '')
-        if (aux[i] == 'A11') {
-            aux[i] = 11
-        }
-        if (aux[i] == 'J' || aux[i] == 'Q' || aux[i] == 'K') {
-            aux[i] = 10
-        }
+        aux[i] = MonteJ[cartasUsadas + i].replace(/[a-z]/g, '').replace('A11', 11).replace(/[J-Q]/g, 10)
         aux[i] = parseInt(aux[i])
     }
     placarJ = aux[0] + aux[2]
@@ -54,11 +42,8 @@ function primeCartas() {//define as primeiras cartas
     twentyOne(placarJ)
 }
 function twentyOne(cartas) {//conferir se fez ou ultrapassou 21
-    if (cartas == 21) {
-        fim('21')//bom
-    }
-    if (cartas > 21) {
-        fim('22')//mal
+    if (cartas >= 21) {
+        fim()
     }
 }
 function mudarA(placar, jc) {//mudar valor de A
@@ -78,48 +63,37 @@ function maisCarta() {//jogador compra uma carta
     cartasUsadas += 1
     twentyOne(placarJ)
 }
-function fim(v) {
+function fim() {
     $('.verso').attr("src", 'img/' + $('.verso')[0].id + '.png')
     placarC += aux[3]
     $('#placarC')[0].innerHTML = placarC
-    if (v == '22') {
-        alert('ultrapassou, perdeu')
-        setTimeout(() => {
-            primeCartas()
-        }, 3000);
-    }
-    else {
-        setTimeout(() => {//pausa para mostrar a carta invertida
-            const intervalo = setInterval(() => {//mostra as outra cartas em intervalos
-                console.log(placarC)
-                if (placarC >= 17) {
-                    clearInterval(intervalo);
-                    setTimeout(() => {
-                        if (placarC == placarJ) {
-                            alert('empate')
-                        }
-                        else if (placarC > placarJ && placarC <= 21) {
-                            alert('vc perdeu')
-                        }
-                        else {
-                            alert('vc ganhou')
-                        }
-                        setTimeout(() => {
-                            primeCartas()
-                        }, 3000);
-                    }, 1000);
-                }
-                else {
-                    console.log(placarC+'s')
-                    $('#cartasCRod').append('<h4 id=C' + MonteJ[cartasUsadas].replace(/[a-z]/g, '') + '><img src="img/' + MonteJ[cartasUsadas] + '.png" alt=""></h4>')
-                    placarC += parseInt(MonteJ[cartasUsadas].replace(/[a-z]/g, '').replace('A11', 11).replace(/[J-Q]/g, 10))
-                    mudarA(placarC, 'C')
-                    $('#placarC')[0].innerHTML = placarC
-                    cartasUsadas += 1
-                    console.log(placarC+'s')
-                }
-            }, 1000);
-
-        }, 1000);
-    }
+    const intervalo = setInterval(() => {//mostra as outras cartas em intervalos
+        if (placarC >= 17 || placarJ > 21) {
+            clearInterval(intervalo);
+            if (placarC == placarJ) {
+                $('#anuncio').css('background-color', '#ff9800')
+                $('#anuncio')[0].innerHTML = "Empate"
+            }
+            else if ((placarC > placarJ && placarC <= 21) || placarJ > 21) {
+                $('#anuncio').css('background-color', '#f44336')
+                $('#anuncio')[0].innerHTML = "Você perdeu"
+            }
+            else {
+                $('#anuncio').css('background-color', '#04AA6D')
+                $('#anuncio')[0].innerHTML = "Você ganhou"
+            }
+            $('#anuncio').show()
+            setTimeout(() => {
+                $('#anuncio').hide()
+                primeCartas()
+            }, 3000);
+        }
+        else {
+            $('#cartasCRod').append('<h4 id=C' + MonteJ[cartasUsadas].replace(/[a-z]/g, '') + '><img src="img/' + MonteJ[cartasUsadas] + '.png" alt=""></h4>')
+            placarC += parseInt(MonteJ[cartasUsadas].replace(/[a-z]/g, '').replace('A11', 11).replace(/[J-Q]/g, 10))
+            mudarA(placarC, 'C')
+            $('#placarC')[0].innerHTML = placarC
+            cartasUsadas += 1
+        }
+    }, 1000);
 }
